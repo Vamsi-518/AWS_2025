@@ -1,0 +1,101 @@
+aws_in_vpc
+
+                                                                     
+       aws
+          vpc  
+                  
+                  internet ---------------(172.16.0.0)                  
+                  gateway                 (172.16.1.0)
+                                          (172.16.2.0)
+                                           [routetable]
+            "subnet"      (12.0.1.0/24) -----            --------"subnet"     (12.0.3.0/24)
+
+
+                   [EC2]                                                [EC2]
+
+
+                public subnet                                       private subnet
+
+
+Go to aws console:
+vpc created
+-vpc only
+-ipv4 cidr block
+-ipv4 cidr :12.0.0.0/16
+created
+
+and
+internet gate-way
+
+--igw-demo created 
+action open add attach vpc
+aslo igw is created.
+
+and
+
+subnet
+--vpc id add
+subnet setting
+avalibilty zone:1a
+   Asia pacific(sydeny)(ap-southeast-2a)
+   ipv4 vpc cidr block:12.0.0.0/16
+   ipv4 sub cidr block:12.0.1.0/24
+avalibilty zone:1b    
+    Asia pacific(sydeny)(ap-southeast-2b)
+   ipv4 vpc cidr block:12.0.0.0/16
+   ipv4 sub cidr block:12.0.3.0/24
+ created.
+
+ And
+ route table
+  vpc attach is create
+  after that edit route
+  add desitination 0.0.0.0/0
+  target igw..
+  save changes
+after that open routetable edit the subnet association and 
+select public subnet save changes 
+finish the route table public subnet.
+
+and routetable
+    vpc attach is create
+    edit subnet association
+    private subnet select save changes
+
+And go to aws console 
+   Ec2 instance launch the instances
+       instance details
+  -unique name is demo
+  -choose amazon machine image(AMI)
+  -ex:ubuntu
+---instance type
+   -t3.micro
+--select key pair for (login)
+   create one 
+   this key (pem.file)
+And
+network settings
+  -choose vpc 
+   attach
+   and 
+   -subnet is attch public subnet select
+  enable Auto-sign publicip
+create security group
+  -test demo sg
+inbound rules
+   ssh(22) anywhere
+And
+configure storage
+  default in 8gb(for ebs :elastic block store)
+  if you needed to increase
+    and launch instances
+    
+---open instance in demo
+connect to ssh is copy
+
+open treminal bash
+paste the ssh 
+accept the connection (yes)
+if successfully..
+ 
+
