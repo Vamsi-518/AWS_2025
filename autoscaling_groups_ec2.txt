@@ -1,0 +1,99 @@
+autoscaling_groups_ec2
+
+vpc created
+-vpc only
+-ipv4 cidr block
+-ipv4 cidr :12.0.0.0/16
+created
+
+And
+
+internet gate-way
+
+--igw-demo created 
+action open add attach vpc
+aslo igw is create
+
+And 
+subnet
+--vpc id add
+subnet setting
+avalibilty zone:1a
+   Asia pacific(sydeny)(ap-southeast-2a)
+   ipv4 vpc cidr block:12.0.0.0/16
+   ipv4 sub cidr block:12.0.1.0/24
+avalibilty zone:1b    
+    Asia pacific(sydeny)(ap-southeast-2b)
+   ipv4 vpc cidr block:12.0.0.0/16
+   ipv4 sub cidr block:12.0.3.0/24
+ created.
+
+ And
+ route table
+name is vpc-demo-test
+created
+ also open route table and subnet association in rt
+ edit both subnet
+     save
+     edit route
+      add route ip :0.0.0.0/0
+      access igw
+      igw add to attach
+      save changes rt created.
+
+ And
+
+ target groups
+    --target type :instance
+    name:tg-ec2-instances
+    ipv4
+    vpc select
+    created
+
+And
+ load balancer
+  name   lb-ec2-
+  scheme   internet-facing
+  load balancer ip address
+  ipv4
+network mapping
+vpc selected
+avaliabilty zone & subnet
+   two add subnet
+-security groups create
+  name
+  all0w http
+  select vpc  
+  http any where 
+  creted.
+--add sg  
+listing & rout 
+ protcol post default 
+ http     80   add
+ once check summary 
+ created and active status..
+
+ And autoscaling group isname
+  launch templates created
+  network 
+    vpc add
+    and subnet both two add
+    --ask load balancer
+      attach to exist load balancer
+  And choose target groups
+       tg-ec2-apache2-http
+       -- add
+       ec2 health checks
+       --health check grace period 20sec
+       click next
+       group size option
+       desired cap:2
+       min:1
+       max:3
+      --auto scaling 
+      no
+      select next
+      created..
+      once open check health.
+
+sucessfully..     
